@@ -8,7 +8,10 @@ const routes = [
     name: 'EventList',
     //รับ parameter มา
     component: EventList,
-    props: (route) => ({ page: parseInt(route.query.page) || 1 })
+    props: (route) => ({
+      page: parseInt(route.query.page) || 1,
+      moredata: parseInt(route.query.moredata) || 1
+    })
   },
   {
     path: '/about',

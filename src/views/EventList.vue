@@ -7,19 +7,23 @@
         id="page-prev"
         :to="{ name: 'EventList', query: { page: page - 1 } }"
         rel="prev"
-        v-if="page !=1"
+        v-if="page != 1"
       >
-        Prev Page</router-link>
+        Prev Page</router-link
       >
+
       <router-link
         id="page-next"
         :to="{ name: 'EventList', query: { page: page + 1 } }"
         rel="next"
         v-if="hasNextPage"
       >
-        Next Page</router-link>
+        Next Page</router-link
       >
     </div>
+    <router-link :to="{ name: 'EventList', query: { moredata: moredata + 1 } }">
+      Add data</router-link
+    >
   </div>
 </template>
 
@@ -36,6 +40,10 @@ export default {
     page: {
       type: Number,
       required: true
+    },
+    moredata: {
+      type: Number,
+      required: true
     }
   },
   components: {
@@ -49,7 +57,7 @@ export default {
   },
   created() {
     watchEffect(() => {
-      EventService.getEvents(2, this.page)
+      EventService.getEvents(this.moredata, this.page)
         .then((response) => {
           this.events = response.data
           this.totalEvents = response.headers['x-total-count'] // <-- Store it
